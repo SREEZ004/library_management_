@@ -1,0 +1,74 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Dues Details</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Dues Details</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+                
+    <div class="page-body">
+        <div class="row">
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Book Details</th>
+                                    <th>Member Details</th>
+                                    <th>Borrowed Details</th>
+                                    <th>Return Status</th>
+                                    <th>Payment Status</th>
+                                    <th>Fine</th>
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td><img src="{{i.bd.b.image}}" alt="prod img" class="img-fluid" style="width: 80px;height: 100px;"></td>
+                                    <td>Book Title : {{i.bd.b.book_title}} <br>
+                                        Author : {{i.bd.b.author}}
+                                    </td>
+                                    <td>Name {{i.m.name}} <br>
+                                        Membership ID : {{i.m.membership_id}}<br>                                    
+                                    </td>
+                                    <td>Borrowed Date : {{i.bd.borrowed_date}} <br>
+                                        Return Date : {{i.bd.return_date}}
+                                    </td>
+                                    <td>
+                                        {% if i.bd.status == 'Not Returned' %}
+                                        <label style="color: rgb(245, 245, 19);"><b>{{i.bd.status}}</b></label>
+                                        {% elif i.bd.status == 'dues' %}
+                                        <label style="color: red;"><b>Return date passed</b></label>
+                                        {% else %}
+                                        <label style="color: rgb(53, 206, 61);"><b>{{i.bd.status}}</b></label>
+                                        {% endif %}
+                                    </td>
+                                    <td style="color: blueviolet;">{{i.status}}</td>
+                                    <td>{{i.fine}}
+                                </tr>
+                                {% endfor %}
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

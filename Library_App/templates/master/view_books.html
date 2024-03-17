@@ -1,0 +1,67 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Books List</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Books List</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}            
+    <div class="page-body">
+        <div class="row">
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Cover Page</th>
+                                    <th>Book Title</th>
+                                    <th>Author</th>
+                                    <th>Publisher</th>
+                                    <th>Number of Copies</th>
+                                    <th>Number Of Copies Available</th>
+                                    <th colspan="3"></th>
+                                    
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td><img src="{{i.image}}" alt="prod img" class="img-fluid" style="width: 80px;height: 100px;"></td>
+                                    <td>{{i.book_title}}</td>
+                                    <td>{{i.author}}</td>
+                                    <td>{{i.publisher}}</td>
+                                    <td>{{i.copies}}</td>
+                                    <td>{{i.no_of_copies}}</td>
+                                    <td><a href="/up_book?b_id={{i.b_id}}" class="btn-sm btn-grd-success">Edit</a></td>
+                                    <td><a href="/delete_book?b_id={{i.b_id}}" class="btn-sm btn-grd-danger">Delete</a></td>
+                                    <td><a href="/more?b_id={{i.b_id}}" class="btn-sm btn-grd-info">More</a></td>
+                                </tr>
+                                {% endfor %}
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

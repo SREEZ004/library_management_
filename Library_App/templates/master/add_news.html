@@ -1,0 +1,96 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Add News</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Add News</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}              
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="card">
+                    
+                    <div class="card-block">
+                        <h4 class="sub-title">ADD NEWS</h4>
+                        
+                        <form method="post" action="/add_news/">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="title">News Title</label>
+                                    <input type="text" required class="form-control" name="title" id="title">
+                                </div>
+                                <div class="col-12">
+                                    <label for="news">Description</label>
+                                    <textarea name="description" required id="des" cols="30" rows="5"  class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary" value="submit" style="float: right;">
+                               
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">  
+                            <div class="tile">
+                                <table class="table table-bordered">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>News title</th>
+                                        <th>Description</th>
+                                        <th>Status</th>
+                                        <th colspan="3">#</th>
+                                        
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for i in data %}
+                                    <tr>
+                                        <td>{{forloop.counter}}</td>
+                                        <td style="max-width: 300px;overflow: hidden;white-space: normal;word-wrap: break-word;">{{i.title}}</td>
+                                        <td style="max-width: 400px;overflow: hidden;white-space: normal;word-wrap: break-word;">{{i.description}}</td>
+                                        <td>{{i.status}}</td>
+                                        <td><a href="/up_news?n_id={{i.n_id}}" class="btn-sm btn-grd-success">Edit</a></td>
+                                        <td><a href="/delete_news?n_id={{i.n_id}}" class="btn-sm btn-grd-danger">Delete</td>
+                                        {% if i.status == 'Not active' %}
+                                        <td><a href="/active_news?n_id={{i.n_id}}" class="btn-sm btn-grd-warning">Publish</td>
+                                        {% else %}
+                                        <td><a href="/inactive_news?n_id={{i.n_id}}" class="btn-sm btn-grd-primary"> Unpublish</td>
+                                    {% endif %}
+                                    </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                                </div>            
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

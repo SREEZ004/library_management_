@@ -1,0 +1,77 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Borrowed Book Details</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Borrow Book Details</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}          
+    <div class="page-body">
+        <div class="row">
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Book Details</th>
+                                    <th>Member Details</th>
+                                    <th>Borrowed Details</th>
+                                    <th>Status</th>
+                                    <th>Update Return</th>
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td><img src="{{i.b.image}}" alt="prod img" class="img-fluid" style="width: 80px;height: 100px;"></td>
+                                    <td>Book Title : {{i.b.book_title}} <br>
+                                        Author : {{i.b.author}}
+                                    </td>
+                                    <td>Name {{i.m.name}} <br>
+                                        Email : {{i.m.email}} <br>
+                                        Contact Number : {{i.m.contact_no}} <br>
+                                        Address : {{i.m.address}} <br>
+                                        Membership ID : {{i.m.membership_id}}<br>                                    
+                                    </td>
+                                    <td>Borrowed Date : {{i.borrowed_date}} <br>
+                                        Return Date : {{i.return_date}}
+                                    </td>
+                                    <td>
+                                        {% if i.status == 'Not Returned' %}
+                                        <label class="label label-warning">{{i.status}}</label>
+                                        {% elif i.status == 'dues' %}
+                                        <label class="label label-danger">Return Date passed</label>
+                                        {% endif %}
+                                    </td>
+                                    <td><a href="/update_return?bd_id={{i.bd_id}}" class="btn-sm btn-grd-primary">Returned</a></td>
+                                </tr>
+                                {% endfor %}
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,89 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Book Details</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Book Details</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}  
+
+    <!-- Page-header end -->   
+    {% if data %}
+    {% for i in data %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <span><h4 style="color: rgb(226, 43, 104);">{{i.book_title}}</h4></span>
+                    <h5 style="color: blueviolet;">{{i.c.category_name}}</h5>
+                    <div class="card-header-right">                                                             <i class="icofont icofont-spinner-alt-5"></i>                                                         </div>
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="col-sm-12 col-xl-2">
+                            <img src="{{i.image}}" alt="" width="120px" height="180px">
+                        </div>
+                        <div class="col-sm-12 col-xl-4">
+                            <h4 class="sub-title">BOOK DETAILS</h4>
+                            <p class="text-muted m-b-30">
+                                Number of pages : {{i.no_of_pages}}
+                            </p>
+                            <p class="text-muted m-b-30">
+                                Number of copies : {{i.copies}}
+                            </p>
+                            <blockquote class="blockquote">
+                                <p class="m-b-0">Book informations</p>
+                                <footer class="blockquote-footer">Book type-
+                                    <cite title="Source Title">{{i.c.category_name}}</cite>
+                                </footer>
+                                <footer class="blockquote-footer">Author-
+                                    <cite title="Source Title">{{i.author}}</cite>
+                                </footer>
+                            </blockquote>
+                            <blockquote class="blockquote">
+                                <p class="m-b-0">Publisher informations</p>
+                                <footer class="blockquote-footer">Publisher-
+                                    <cite title="Source Title">{{i.publisher}}</cite>
+                                </footer>
+                                <footer class="blockquote-footer">Published Date-
+                                    <cite title="Source Title">{{i.published_date}}</cite>
+                                </footer>
+                            </blockquote>
+                        </div>
+                        <div class="col-sm-12 col-xl-6">
+                            <h4 class="sub-title">DESCRIPTION</h4>
+                            <dl class="dl-horizontal row">
+                                <dt class="col-sm-3">Description</dt>
+                                <dd class="col-sm-9">{{i.description}}.</dd>
+                                <dt class="col-sm-3">Additional Data</dt>
+                                <dd class="col-sm-9">{{i.additional_data}}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-sm-12 col-xl-12">
+                            <a href="/view_books" class="btn btn-grd-info btn-skew" style="float: right;">Go back</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+    {% endfor %}
+    {% endif %}
+                 
+{% endblock content %}

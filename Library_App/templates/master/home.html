@@ -1,0 +1,110 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+<div class="page-header card" style="margin-top: 2px;">
+    <div class="card-block">
+        <h5 class="m-b-10">Admin Home</h5>
+        <ul class="breadcrumb-title b-t-default p-t-10">
+            <li class="breadcrumb-item">
+                <a href="index.html"> <i class="fa fa-home"></i> </a>
+            </li>
+                <li class="breadcrumb-item"><a href="#!">Pages</a>
+                </li>
+                <li class="breadcrumb-item"><a href="#!">Admin Home</a>
+                </li>
+        </ul>
+    </div>
+</div>
+
+<div class="page-body">
+    <div class="row">
+            <!-- order-card start -->
+            
+            <div class="col-md-6 col-xl-3" style="display: inline-block;">
+                <a href="/user_list">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Members List</h6>
+                        <h2 class="text-right"><i class="ti-user f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>
+            <div class="col-md-6 col-xl-3" style="display: inline-block;">
+                <a href="/subscription_details">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Subscription</h6>
+                        <h2 class="text-right"><i class="ti-id-badge f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <a href="/add_category">
+                <div class="card bg-c-yellow order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Add Book Category</h6>
+                        <h2 class="text-right"><i class="ti-layout-menu-v f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>
+            <div class="col-md-6 col-xl-3">
+                <a href="/add_book">
+                <div class="card bg-c-pink order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Add Book</h6>
+                        <h2 class="text-right"><i class="ti-book f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div>
+                </a>
+            </div>  
+
+            <div class="col-md-6 col-xl-3">
+                <a href="/borrow_details">
+                <div class="card bg-c-pink order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Borrowed Books</h6>
+                        <h2 class="text-right"><i class="ti-book f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div>
+                </a>
+            </div>  
+            <div class="col-md-6 col-xl-3">
+                <a href="/reservation_details">
+                <div class="card bg-c-yellow order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Book Reservations</h6>
+                        <h2 class="text-right"><i class="ti-book f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>
+            <div class="col-md-6 col-xl-3" style="display: inline-block;">
+                <a href="/add_news">
+                <div class="card bg-c-green order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Add News</h6>
+                        <h2 class="text-right"><i class="ti-layers f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>
+            <div class="col-md-6 col-xl-3" style="display: inline-block;">
+                <a href="/view_donations">
+                <div class="card bg-c-blue order-card">
+                    <div class="card-block">
+                        <h6 class="m-b-20">Book Donation</h6>
+                        <h2 class="text-right"><i class="ti-book f-left"></i><span></span></h2>
+                        <p class="m-b-0"><span class="f-right"></span></p>
+                    </div>
+                </div></a>
+            </div>       
+        </div>
+    </div>
+
+      
+{% endblock content %}

@@ -1,0 +1,84 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Add Book Category</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Add Book Category</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}          
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    
+                    <div class="card-block">
+                        <h4 class="sub-title">BOOK CATEGORY</h4>
+                        
+                        <form method="post" action="/add_category/">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="cat">Enter the book category</label>
+                                    <input type="text" class="form-control" required name="category" id="cat">
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary" value="submit" style="float: right;">
+                               
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% if data %}
+            <div class="col-sm-6">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Book Category</th>
+                                    <th colspan="2">#</th>
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{i.category_name}}</td>
+                                    <td><a href="/up_category?bc_id={{i.bc_id}}" class="btn-sm btn-grd-success">Edit</a></td>
+                                    <td><a href="/delete_category?bc_id={{i.bc_id}}" class="btn-sm btn-grd-danger">Delete</td>
+                                </tr>
+                                {% endfor %}
+                                <!-- <tr>
+                                    <td><img src="assets/images/product/prod3.jpg" alt="prod img" class="img-fluid"></td>
+                                    <td>PNG002653</td>
+                                    <td>Eugine Turner</td>
+                                    <td>04-01-2017</td>
+                                    <td><span class="label label-success">Delivered</span></td>
+                                    <td>#7234417</td>
+                                </tr> -->
+                                
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

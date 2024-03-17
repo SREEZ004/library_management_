@@ -1,0 +1,94 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Edit Book</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Edit Book</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+                
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    {% if data %}
+                    {% for i in data %}
+                    <div class="card-block">
+                        <h4 class="sub-title">EDIT BOOK</h4>
+                        
+                        <form method="post" action="/edit_book/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <input type="hidden" value="{{i.b_id}}" name="b_id">
+                                <div class="col-8">
+                                    <label for="title">Book title</label>
+                                    <input type="text" class="form-control" required value="{{i.book_title}}" name="book_title" id="title">
+                                </div>
+                                <div class="col-4">
+                                    <label for="bc">Book Category</label>
+                                    <select name="c_id" id="bc" class="form-control" required>
+                                        <option value="{{i.c_id}}">{{i.c.category_name}}</option>
+                                        {% if data2 %}
+                                        {% for i in data2 %}
+                                        <option value="{{i.bc_id}}">{{i.category_name}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="image">Book Cover Image</label>
+                                    <input type="file" class="form-control" name="image" id="image">
+                                    <img src="{{i.image}}" alt="" width="60px" height="80px">
+                                </div>
+                                <div class="col-4">
+                                    <label for="aut">Author Name</label>
+                                    <input type="text" class="form-control" value="{{i.author}}" name="author" id="aut" required>
+                                </div>
+                                <div class="col-4">
+                                    <label for="pdate">Publication Date</label>
+                                    <input type="date" class="form-control" required value="{{i.published_date|date:'Y-m-d'}}" name="published_date" id="pdate">
+                                </div>
+                                <div class="col-6">
+                                    <label for="pub">Publisher</label>
+                                    <input type="text" class="form-control" required value="{{i.publisher}}" name="publisher" id="pub">
+                                </div>
+                                <div class="col-3">
+                                    <label for="copies">Number Of Copies</label>
+                                    <input type="text" class="form-control" required value="{{i.no_of_copies}}" name="no_of_copies" id="copies">
+                                </div>
+                                <div class="col-3">
+                                    <label for="pages">Number Of Pages</label>
+                                    <input type="text" class="form-control" required value="{{i.no_of_pages}}" name="no_of_pages" id="pages">
+                                </div>
+                                <div class="col-7">
+                                    <label for="des">Book Description</label>
+                                    <textarea name="description" id="des" required cols="30" rows="5"  class="form-control">{{i.description}}</textarea>
+                                </div>
+                                <div class="col-5">
+                                    <label for="add">Additional Meta Data</label>
+                                    <textarea name="additional_data" id="add" required cols="30" rows="5"  class="form-control">{{i.additional_data}}</textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary" value="submit" style="float: right;">
+                               
+                        </form>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,51 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Edit Book Category</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Edit Book Category</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+                
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    
+                    <div class="card-block">
+                        <h4 class="sub-title">EDIT BOOK CATEGORY</h4>
+                        
+                        <form method="post" action="/update_category/">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                {% if data %}
+                                {% for i in data %}
+                                <div class="col-12">
+                                    <label for="cat">Enter the book category</label>
+                                    <input type="text" class="form-control" name="category" value="{{i.category_name}}" id="cat">
+                                </div>
+                                <input type="hidden" value="{{i.bc_id}}" name="bc_id" id="bc_id">
+                                {% endfor %}
+                                {% endif %}
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary " value="Edit" style="float: right;">
+                               
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

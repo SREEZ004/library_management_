@@ -1,0 +1,112 @@
+{% extends 'master/index.html' %}
+{% load static %}
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Add Books</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Add Books</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}          
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    
+                    <div class="card-block">
+                        <h4 class="sub-title">ADD BOOK</h4>
+                        
+                        <form method="post" action="/add_book/" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-8">
+                                    <label for="title">Book title</label>
+                                    <input type="text" required class="form-control" name="book_title" id="title">
+                                </div>
+                                <div class="col-4">
+                                    <label for="bc">Book Category</label>
+                                    <select name="c_id" id="bc" required class="form-control">
+                                        <option value="">--Select--</option>
+                                        {% if data %}
+                                        {% for i in data %}
+                                        <option value="{{i.bc_id}}">{{i.category_name}}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                </div>
+                                <div class="col-4">
+                                    <label for="image">Book Cover Image</label>
+                                    <input type="file" required class="form-control" name="image" id="image">
+                                </div>
+                                <div class="col-4">
+                                    <label for="aut">Author Name</label>
+                                    <input type="text" required class="form-control" name="author" id="aut">
+                                </div>
+                                <div class="col-4">
+                                    <label for="pdate">Publication Date</label>
+                                    <input type="date" required class="form-control" name="published_date" id="pdate">
+                                </div>
+                                <div class="col-6">
+                                    <label for="pub">Publisher</label>
+                                    <input type="text" required class="form-control" name="publisher" id="pub">
+                                </div>
+                                <div class="col-3">
+                                    <label for="copies">Number Of Copies</label>
+                                    <input type="text" required class="form-control" name="no_of_copies" id="copies">
+                                </div>
+                                <div class="col-3">
+                                    <label for="pages">Number Of Pages</label>
+                                    <input type="text" required class="form-control" name="no_of_pages" id="pages">
+                                </div>
+                                <div class="col-7">
+                                    <label for="des">Book Description</label>
+                                    <textarea name="description" required id="des" cols="30" rows="5"  class="form-control"></textarea>
+                                </div>
+                                <div class="col-5">
+                                    <label for="add">Additional Meta Data</label>
+                                    <textarea name="additional_data" required id="add" cols="30" rows="5" placeholder="Language&#10;Country&#10;Company&#10;.......&#10;.........&#10;"  class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary" value="submit" style="float: right;">
+                               
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'Validation/jquery-1.11.1.min.js' %}"></script>
+
+    <script>
+        $(function(){
+            var dtToday = new Date();
+         
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate() -1;
+            var year = dtToday.getFullYear();
+            if(month < 10)
+                month = '0' + month.toString();
+            if(day < 10)
+                day = '0' + day.toString();
+            
+            var maxDate = year + '-' + month + '-' + day;
+            $('#pdate').attr('max', maxDate);
+        });
+        </script>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Feedback</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Feedback</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+    {% if messages %}
+    {% for message in messages %}
+        <center><h6 style="color: rgb(31, 95, 31);">{{message}}</h6></center>
+    {% endfor %}
+    {% endif %}          
+    <div class="page-body">
+        <div class="row">
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Member Details</th>
+                                    <th>Feedback</th>
+                                    <th>Feedback Date</th>
+                                    <th>Reply</th>
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>Name {{i.m.name}} <br>
+                                        Email : {{i.m.email}} <br>
+                                        Contact Number : {{i.m.contact_no}} <br>
+                                        Address : {{i.m.address}} <br>
+                                        Membership ID : {{i.m.membership_id}}<br>                                    
+                                    </td>
+                                    <td>{{i.feedback}}</td>
+                                    <td>{{i.feedback_date}}</td>
+                                    {% if i.reply == None %}
+                                    <td>
+                                        <div id="bdiv"><button onclick="disp()" class="btn-sm btn-grd-primary">Reply</button></div>
+                                        <div id="fdiv" style="display: none;">
+                                         <form method="post" action="/reply/">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="{{i.f_id}}" name="f_id">
+                                        <textarea class="form-control" rows="5" name="reply" placeholder="Reply"></textarea>
+                                        <br>
+                                        <input type="submit" style="float: right;" value="Submit" class="btn-sm btn-grd-primary">
+                                        </form>
+                                         </div>
+                                    </td>
+                                    {% else %}
+                                    <td>{{i.reply}}</td>
+                                    {% endif %}
+                                </tr>
+                                {% endfor %}
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        function disp(){
+            var x = document.getElementById("fdiv");
+            var y = document.getElementById("bdiv");
+    
+            y.style.display = "none";
+            x.style.display = "block";
+        }
+    </script>
+{% endblock content %}

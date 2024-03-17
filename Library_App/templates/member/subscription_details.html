@@ -1,0 +1,88 @@
+{% extends 'member/index.html' %}
+{% load static %}
+
+{% block style %}
+<style>
+    span{
+        color: blueviolet;
+        padding: 2%;
+        border: 1px solid rgb(226, 43, 113);
+        border-radius: 10px;
+    }
+</style>
+{% endblock style %}
+
+{% block content %}
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-4">Subscription details</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Subscription details</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+    <center><h5 style="color: rgb(31, 95, 31);">{{message}}</h5></center>
+{% endfor %}
+{% endif %} 
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5">
+            <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="border-start border-5 border-primary ps-4 mb-5">
+                    <h6 class="text-body text-uppercase mb-2">SUBSCRIPTION</h6>
+                    <h1 class="display-6 mb-0">Subscription details</h1>
+                </div>
+                <p class="mb-5"></p>
+                {% if data %}
+                    {% for i in data %}
+                <div class="row gy-5 gx-4" style="border: 1px solid grey;padding-bottom: 5%;border-radius: 10px;">
+                    <div class="col-sm-3 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <h6 class="mb-0">Subscription Type</h6>
+                        </div>
+                        <span>{{i.subscription_type}}</span>
+                    </div>
+                    <div class="col-sm-3 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <h6 class="mb-0">Subscribed Date</h6>
+                        </div>
+                        <span>{{i.subscription_date}}</span>
+                    </div>
+                    <div class="col-sm-3 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <h6 class="mb-0">Subscription Validity</h6>
+                        </div>
+                        <span>{{i.subscription_validity}}</span>
+                    </div>
+                    <div class="col-sm-3 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-check fa-2x text-primary flex-shrink-0 me-3"></i>
+                            <h6 class="mb-0">Subscription Amount</h6>
+                        </div>
+                        <span>{{i.amount}}</span>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+                {% else %}
+                <h5>You Have Not Any Subscriptions</h5>
+                    {% endif%}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+      
+{% endblock content %}

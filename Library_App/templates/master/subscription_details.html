@@ -1,0 +1,65 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">User List</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">User List</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+                
+    <div class="page-body">
+        <div class="row">
+            {% if data %}
+            <div class="col-sm-12">
+                <div class="card tabs-card">
+                    <div class="card-block p-0">              
+                        <div class="tab-content card-block">              
+                            <table class="table">
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Contact Details</th>
+                                    <th>Membership ID</th>
+                                    <th>Membership Date</th>
+                                    <th>Subscription Type</th>
+                                    <th>Subscription Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                                {% for i in data %}
+                                <tr>
+                                    <td>{{forloop.counter}}</td>
+                                    <td>{{i.m.name}}</td>
+                                    <td>Email : {{i.m.email}} <br>
+                                        Contact Number : {{i.m.contact_no}} <br>
+                                        Address : {{i.m.address}}
+                                    </td>
+                                    <td>{{i.m.membership_id}}</td>
+                                    <td>{{i.m.membership_taken_date}}</td>
+                                    <td>{{i.subscription_type}}</td>
+                                    <td>Subscription date : {{i.subscription_date}} <br>
+                                        Subscription validity : {{i.subscription_validity}}
+                                    </td>
+                                    <td>{{i.amount}}</td>
+                                </tr>
+                                {% endfor %}
+                            </table>      
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,53 @@
+{% extends 'master/index.html' %}
+
+{% block content %}
+    
+    <!-- Page-header start -->
+    <div class="page-header card" style="margin-top: 2px;">
+        <div class="card-block">
+            <h5 class="m-b-10">Add News</h5>
+            <ul class="breadcrumb-title b-t-default p-t-10">
+                <li class="breadcrumb-item">
+                    <a href="index.html"> <i class="fa fa-home"></i> </a>
+                </li>
+                    <li class="breadcrumb-item"><a href="#!">Pages</a>
+                    </li>
+                    <li class="breadcrumb-item"><a href="#!">Add News</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+    <!-- Page-header end -->    
+                
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-7">
+                <div class="card">
+                    
+                    <div class="card-block">
+                        <h4 class="sub-title">ADD NEWS</h4>
+                        {% if data %}
+                        {% for i in data %}
+                        <form method="post" action="/edit_news/">
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-12">
+                                    <label for="title">Enter Title</label>
+                                    <input type="hidden" required value="{{i.n_id}}" name="n_id">
+                                    <input type="text" class="form-control" value="{{i.title}}" name="title" id="title">
+                                </div>
+                                <div class="col-12">
+                                    <label for="news">Description</label>
+                                    <textarea name="description" required id="des" cols="30" rows="5"  class="form-control">{{i.description}}</textarea>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-grd-primary" value="submit" style="float: right;">                            
+                        </form>
+                        {% endfor %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,97 @@
+{% extends 'member/index.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid page-header py-5 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container text-center py-5">
+        <h1 class="display-4 text-white animated slideInDown mb-4">Dues Page</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a class="text-white" href="#">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-white" href="#">Pages</a></li>
+                <li class="breadcrumb-item text-primary active" aria-current="page">Dues Page</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+{% if messages %}
+{% for message in messages %}
+    <center><h5 style="color: rgb(31, 95, 31);">{{message}}</h5></center>
+{% endfor %}
+{% endif %} 
+
+
+
+<div class="container-xxl service py-5">
+   
+    <div class="container">
+        <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
+            <!-- <p class="d-inline-block border rounded text-primary fw-semi-bold py-1 px-3">Nomination detais</p> -->
+            <h1 class="display-5 mb-5">Dues</h1>
+        </div>
+        {% if data %}
+        <div class="row g-4 wow fadeInUp" data-wow-delay="0.3s">
+            <div class="col-md-12">
+                <div class="tile">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Image</th>
+                        <th>Book Details</th>
+                        <th>Member Details</th>
+                        <th>Borrowed Details</th>
+                        <th>Return Status</th>
+                        <th>Payment Status</th>
+                        <th>Fine</th>
+                        
+                       
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in data %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td><img src="{{i.bd.b.image}}" alt="prod img" class="img-fluid" style="width: 80px;height: 100px;"></td>
+                        <td>Book Title : {{i.bd.b.book_title}} <br>
+                            Author : {{i.bd.b.author}}
+                        </td>
+                        <td>Name {{i.m.name}} <br>
+                            Membership ID : {{i.m.membership_id}}<br>                                    
+                        </td>
+                        <td>Borrowed Date : {{i.bd.borrowed_date}} <br>
+                            Return Date : {{i.bd.return_date}}
+                        </td>
+                        <td>
+                            {% if i.bd.status == 'Not Returned' %}
+                            <label style="color: rgb(245, 245, 19);"><b>{{i.bd.status}}</b></label>
+                            {% elif i.bd.status == 'dues' %}
+                            <label style="color: red;"><b>Return date passed</b></label>
+                            {% else %}
+                            <label style="color: rgb(53, 206, 61);"><b>{{i.bd.status}}</b></label>
+                            {% endif %}
+                        </td>
+                        <td>{{i.status}}</td>
+                        <td>{{i.fine}}
+                            {% if i.status == 'Not paid' %}
+                        <a href="/pay?d_id={{i.d_id}}" class="btn-sm btn-success">Pay Now</a></td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+        {% else %}
+                <h5>You Have No any dues</h5>
+{% endif %}
+    </div>
+    
+</div>
+
+
+
+      
+{% endblock content %}
